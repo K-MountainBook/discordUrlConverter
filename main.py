@@ -9,7 +9,8 @@ intents.message_content = True
 
 client = discord.Client(intents=intents)
 
-URLPrefix = "steam://openurl/"
+URLPrefix = "steam://"
+APIURLs = 'https://api.deile.net/locationRedirect'
 RAGEX = "https://.+steampowered.com.+[0-9]{1,8}.*/"
 
 
