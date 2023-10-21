@@ -14,6 +14,7 @@ URL_PREFIX = "steam://"
 OPEN_STORE_PAGE = "store/"
 OPEN_USER_PROFILE = "SteamIDPage/"
 API_URL = 'https://api.deile.net/locationRedirect'
+API_PARAMETER = '?steamurl='
 # store.steampowered.com,help.steampowered.com,steamcommunity.com
 RAGEX = "https://.+[steampowered|steamcommunity].com/"
 
@@ -43,13 +44,18 @@ async def on_message(message: discord.Message):
         # ['', 'app', '990080', '_', '']
         split_path = str(parsed_url.path).split("/")
 
+        # URLの作成を始める
+        returl_url = API_URL + API_PARAMETER + URL_PREFIX
+
         match split_path[1]:
             case 'app':
-                print(split_path[1])
+                returl_url = returl_url + OPEN_STORE_PAGE + split_path[2]
             case 'profiles':
-                print(split_path[1])
+                returl_url.join(OPEN_USER_PROFILE).join(split_path[2])
 
-        # await message.channel.send(convert_text)
+        print(returl_url)
+
+        await message.channel.send(returl_url)
 
 
 def main():
